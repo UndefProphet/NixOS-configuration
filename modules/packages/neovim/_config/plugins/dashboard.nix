@@ -1,5 +1,0 @@
-{
-  plugins.dashboard = {
-    enable = true;
-  };
-}

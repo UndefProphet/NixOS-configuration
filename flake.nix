@@ -5,18 +5,18 @@
     let
 
       # Tack as input manager with lazy evaluation
-      inputs = (import ./inputs) { overrides = args.tackOverrides or { }; };
+      inputs = (import ./inputs/tack.nix) { overrides = args.tackOverrides or { }; };
       self' = self // {
         inputs = inputs;
       }; # to make tack compatiable with flake-parts
 
-      flakeLib = (import ./lib.nix) {
-        inherit inputs;
-        inherit (inputs.nixpkgs) lib;
-        self = self';
-      };
-
-      lib = inputs.nixpkgs.lib // flakeLib.config.flake.lib;
+      # flakeLib = (import ./flake/lib.nix) {
+      #   inherit inputs;
+      #   inherit (inputs.nixpkgs) lib;
+      #   self = self';
+      # };
+      #
+      # lib = inputs.nixpkgs.lib // flakeLib.config.flake.lib;
 
     in
     inputs.flake-parts.lib.mkFlake
@@ -24,13 +24,15 @@
         inherit inputs;
         self = self';
         specialArgs = {
-          inherit lib;
+          # inherit lib;
         };
       }
       (
         inputs.import-tree [
+          ./flake # Core flake functionality
+
           ./hosts # Hardware based configurations
-          ./modules # Modules
+          ./modules # Nixos Modules
           ./hjem # Hjem modules
         ]
       );

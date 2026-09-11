@@ -2,6 +2,7 @@
   inputs,
   lib,
   self,
+  extendedLib,
   ...
 }:
 let
@@ -15,6 +16,7 @@ in
   flake.modules.nixos.hjem =
     {
       config,
+      pkgs,
       username,
       homedir,
       self',
@@ -34,6 +36,7 @@ in
           directory = homedir;
         };
         specialArgs = {
+          lib = extendedLib pkgs;
           inherit
             self'
             inputs'

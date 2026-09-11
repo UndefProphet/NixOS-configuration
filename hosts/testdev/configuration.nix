@@ -1,12 +1,12 @@
 {
-  lib,
   inputs,
-  self,
+  lib,
+  mkNixosUserSystem,
   ...
 }:
 {
   flake.nixosConfigurations = {
-    lap = lib.mkNixosUserSystem {
+    lap = mkNixosUserSystem {
       configurationName = "lap";
       system = "x86_64-linux";
       stateVersion = "25.11";
@@ -14,18 +14,26 @@
       username = "tar";
 
       configuration = {
-        conf = {
-          boot.grub.enable = true;
-          terminal = {
-            terminal.enable = true;
-            git.enable = true;
+
+        collections = {
+          core = true;
+          graphical-environment = true;
+
+          packages = {
+            generic = true;
+            creative.enable = true;
+            gaming = true;
+            nix-utilities = true;
+            wayland-utilities = true;
           };
         };
+
+        conf.networking.wifi.enable = true;
       };
 
       extraModules = [
-        (import ./_disko.nix { inherit inputs; }).flake.modules.nixos.lap
-        (import ./_hardware.nix { inherit lib; }).flake.modules.nixos.lap
+        ./_disko.nix
+        ./_hardware.nix
       ];
     };
   };

@@ -1,74 +1,27 @@
 [all_follow]
 nixpkgs = "nixpkgs"
 
-[inputs.base16]
-url = "gh:SenchoPens/base16.nix"
-
 [inputs.disko]
 url = "gh:nix-community/disko?ref=master"
 
 [inputs.flake-parts]
 url = "gh:hercules/flake-parts?ref=main"
 
-[inputs.glide-browser]
-url = "gh:glide-browser/glide.nix"
-
 [inputs.hjem]
 url = "gh:feel-co/hjem?ref=main"
 
-[inputs.home-manager]
-url = "gh:nix-community/home-manager?ref=master"
-
-[inputs.hypr-plugs]
+[inputs.hyprland-scroll-overview]
 type = "fetch"
-url = "gh:hyprwm/hyprland-plugins"
-
-[inputs.hyprland]
-url = "gh:hyprwm/Hyprland?ref=main"
+url = "gh:yayuuu/hyprland-scroll-overview"
 
 [inputs.import-tree]
 url = "gh:denful/import-tree?ref=main"
 
-[inputs.niri]
-url = "gh:niri-wm/niri"
-
-[inputs.niri-flake]
-url = "gh:myume/niri-flake?ref=blur"
-
-[inputs.nix-index-database]
-url = "gh:nix-community/nix-index-database?ref=main"
-
-[inputs.nixcord]
-url = "gh:FlameFlag/nixcord?ref=main"
-
-[inputs.nixos-core]
-url = "gh:manic-systems/nixos-core"
-
-[inputs.nixos-credentials]
-type = "fetch"
-url = "git+ssh://git@github.com/UndefProphet/.nixos.credentials"
-
 [inputs.nixpkgs]
 url = "gh:nixos/nixpkgs?ref=nixos-unstable"
 
-[inputs.nixvim]
-url = "gh:nix-community/nixvim"
-
 [inputs.nur]
 url = "gh:nix-community/NUR?ref=master"
-
-[inputs.scroll-overview]
-type = "fetch"
-url = "gh:yayuuu/hyprland-scroll-overview"
-
-[inputs.sops-nix]
-url = "gh:Mic92/sops-nix?ref=master"
-
-[inputs.spicetify-nix]
-url = "gh:Gerg-L/spicetify-nix?ref=master"
-
-[inputs.stylix]
-url = "gh:nix-community/stylix?ref=master"
 
 [inputs.tack]
 url = "gh:manic-systems/tack"

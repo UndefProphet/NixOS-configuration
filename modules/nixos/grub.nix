@@ -25,8 +25,8 @@
             efiSupport = true;
             efiInstallAsRemovable = true;
             useOSProber = true;
-            gfxmodeEfi = "3440x1440";
-            gfxmodeBios = "3440x1440";
+            gfxmodeEfi = lib.mkDefault "3440x1440";
+            gfxmodeBios = lib.mkDefault "3440x1440";
             splashMode = "normal";
           };
         };

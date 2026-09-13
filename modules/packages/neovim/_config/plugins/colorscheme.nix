@@ -71,7 +71,7 @@
         invert_signs = lib.mkDefault false;
         invert_tabline = lib.mkDefault false;
         inverse = lib.mkDefault true; # invert background for search, diffs, statuslines and errors
-        contrast = lib.mkDefault ""; # can be "hard", "soft" or empty string
+        contrast = lib.mkDefault "hard"; # can be "hard", "soft" or empty string
         palette_overrides = { };
         overrides = { };
         dim_inactive = lib.mkDefault false;

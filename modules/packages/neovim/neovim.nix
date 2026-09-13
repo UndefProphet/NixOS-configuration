@@ -10,10 +10,33 @@ in
 
   flake = {
     nixvimModule = import configPath;
-    homeModules.default = {
-      imports = [ nixvim.homeModules.nixvim ];
-      programs.nixvim = import configPath;
-    };
+
+    modules.nixos.neovim =
+      {
+        config,
+        lib,
+        ...
+      }:
+      let
+        cfg = config.conf.packages.neovim;
+      in
+      {
+        options.conf.packages.neovim.enable = lib.mkEnableOption {
+          description = "Enable neovim";
+        };
+
+        config = lib.mkIf cfg.enable {
+          hm = {
+            imports = [
+              nixvim.homeModules.nixvim
+              {
+                programs.nixvim.enable = true;
+              }
+            ];
+            programs.nixvim = import configPath;
+          };
+        };
+      };
   };
 
   perSystem =

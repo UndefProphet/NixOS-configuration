@@ -1,9 +1,6 @@
 [all_follow]
 nixpkgs = "nixpkgs"
 
-[inputs.base16]
-url = "gh:SenchoPens/base16.nix"
-
 [inputs.disko]
 url = "gh:nix-community/disko?ref=master"
 
@@ -22,20 +19,11 @@ url = "gh:hyprwm/Hyprland?ref=main"
 [inputs.import-tree]
 url = "gh:denful/import-tree?ref=main"
 
-[inputs.niri]
-url = "gh:niri-wm/niri"
-
-[inputs.niri-flake]
-url = "gh:myume/niri-flake?ref=blur"
-
 [inputs.nix-index-database]
 url = "gh:nix-community/nix-index-database?ref=main"
 
 [inputs.nixcord]
 url = "gh:FlameFlag/nixcord?ref=main"
-
-[inputs.nixos-core]
-url = "gh:manic-systems/nixos-core"
 
 [inputs.nixos-credentials]
 type = "fetch"
@@ -61,6 +49,12 @@ url = "gh:nix-community/stylix?ref=master"
 
 [inputs.tack]
 url = "gh:manic-systems/tack"
+
+[inputs.hyprland-scroll-overview]
+url = "gh:yayuuu/hyprland-scroll-overview?ref=main"
+
+[inputs."palette.nix"]
+url = "path:/home/tar/development/palette.nix"
 
 [shorturls]
 gh = "github:{path}"

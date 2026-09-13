@@ -1,0 +1,1 @@
+Apps are evaluated every time mean while packages are cached meaning any operation within the flake itself would not work. write-tack-d

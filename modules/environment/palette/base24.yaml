@@ -1,0 +1,32 @@
+scheme: "Base24"
+author: "Auto-generated basic theme"
+variant: "dark"
+
+palette:
+  # Base16 standard
+  base00: "#181818" # default background
+  base01: "#252525" # lighter background
+  base02: "#3b3b3b" # selection background
+  base03: "#585858" # comments, invisibles
+  base04: "#737373" # dark foreground
+  base05: "#a8a8a8" # default foreground
+  base06: "#d0d0d0" # light foreground
+  base07: "#e8e8e8" # lightest foreground
+  base08: "#ab4642" # red
+  base09: "#dc9656" # orange
+  base0A: "#f7ca88" # yellow
+  base0B: "#a1b56c" # green
+  base0C: "#86c1b9" # cyan
+  base0D: "#7cafc2" # blue
+  base0E: "#ba8baf" # purple
+  base0F: "#a16946" # brown
+
+  # Base24 extension
+  base10: "#101010" # darker background
+  base11: "#080808" # darkest background
+  base12: "#cc6666" # bright red
+  base13: "#de935f" # bright orange
+  base14: "#f0c674" # bright yellow
+  base15: "#b5bd68" # bright green
+  base16: "#8abeb7" # bright cyan
+  base17: "#81a2be" # bright blue

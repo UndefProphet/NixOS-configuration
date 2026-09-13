@@ -1,49 +1,47 @@
 {
-  self,
   inputs,
-  withSystem,
+  lib,
+  mkNixosUserSystem,
   ...
 }:
 {
-  flake.nixosConfigurations =
-    let
-      # stateVersion = lib.trivial.oldestSupportedRelease;
-      stateVersion = "25.11";
+  flake.nixosConfigurations = {
+    lap = mkNixosUserSystem {
+      configurationName = "lap";
       system = "x86_64-linux";
-      configurationName = "laptop";
-
-      nixos = "/dev/nvme0n1";
-      home = null;
-      swapSize = "16G";
-
+      stateVersion = "25.11";
+      hostName = "lap";
       username = "tar";
-      hostname = "lapman";
-      homedir = "/home/${username}";
-      configdir = "${homedir}/.nixos";
-    in
-    {
-      laptop = withSystem "x86_64-linux" (
-        { self', inputs', ... }:
-        inputs.nixpkgs.lib.nixosSystem {
-          inherit system;
-          specialArgs = {
-            inherit stateVersion;
-            inherit username;
-            inherit hostname;
-            inherit homedir;
-            inherit configdir;
-            inherit configurationName;
-            inherit self';
-            inherit inputs';
-          };
 
-          modules = with self.modules.nixos; [
-            # default
-            laptop
-            common
-            wireless
-          ];
-        }
-      );
+      configuration = {
+
+        collections = {
+          core = true;
+          terminal = true;
+          graphical-environment = true;
+
+          packages = {
+            generic.enable = true;
+            creative.enable = true;
+            gaming.enable = true;
+            nix-utilities.enable = true;
+            wayland-utilities.enable = true;
+          };
+        };
+
+        conf.networking.wifi.enable = true;
+        conf.packages.ddcutil.enable = true;
+        conf.system.auto-mount-disk.enable = true;
+
+        services.fwupd.enable = true;
+
+        conf.system.docker.enable = true;
+      };
+
+      extraModules = [
+        ./_disko.nix
+        ./_hardware.nix
+      ];
     };
+  };
 }

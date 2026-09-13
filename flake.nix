@@ -5,7 +5,7 @@
     let
 
       # Tack as input manager with lazy evaluation
-      inputs = (import ./inputs) { overrides = args.tackOverrides or { }; };
+      inputs = (import ./inputs/tack.nix) { overrides = args.tackOverrides or { }; };
       self' = self // {
         inputs = inputs;
       }; # to make tack compatiable with flake-parts
@@ -18,8 +18,9 @@
       }
       (
         inputs.import-tree [
+          ./flake # Core flake functionality
           ./hosts # Hardware based configurations
-          ./modules # Modules
+          ./modules # Nixos Modules
         ]
       );
 }

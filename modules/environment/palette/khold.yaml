@@ -1,0 +1,29 @@
+name: Khold
+author: Andrea Schiavini (original code by Casey Miller)
+variant: dark
+
+palette:
+  base00: "#000000"
+  base01: "#181818"
+  base02: "#222222"
+  base03: "#505050"
+  base04: "#9b99a3"
+  base05: "#f1f1f1"
+  base06: "#F5F5F5"
+  base07: "#ffffff"
+  base08: "#5f8787"
+  base09: "#aaaaaa"
+  base0A: "#888888"
+  base0B: "#c1c1c1"
+  base0C: "#eceee3"
+  base0D: "#aaaaaa"
+  base0E: "#974b46"
+  base0F: "#5f8787"
+  base10: "#000000"
+  base11: "#000000"
+  base12: "#5f8787"
+  base13: "#888888"
+  base14: "#c1c1c1"
+  base15: "#eceee3"
+  base16: "#aaaaaa"
+  base17: "#974b46"

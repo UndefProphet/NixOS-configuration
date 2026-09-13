@@ -2,7 +2,7 @@
   globalOpts = {
     # Line numbers
     number = true;
-    relativenumber = false;
+    relativenumber = true;
     scrolloff = 8;
 
     # Tabs & Indentation

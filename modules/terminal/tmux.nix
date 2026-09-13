@@ -1,27 +1,35 @@
-{
-  flake.modules.nixos.terminal = { pkgs, ... }: {
-    hm.programs.tmux = {
-      enable = true;
-      terminal = "screen";
-      mouse = true;
-      keyMode = "vi";
-      focusEvents = false;
-      aggressiveResize = false;
-      baseIndex = 1;
-      clock24 = true;
+{ lib, ... }: {
+  flake.modules.nixos.tmux = { config, ... }: {
+    options.conf.terminal.tmux.enable = lib.mkEnableOption { };
 
-      extraConfig = /* conf */ ''
-        set -g status-keys vi
+    config =
+      let
+        cfg = config.conf.terminal.tmux;
+      in
+      lib.mkIf cfg.enable {
+        hm.programs.tmux = {
+          enable = true;
+          terminal = "screen";
+          mouse = true;
+          keyMode = "vi";
+          focusEvents = false;
+          aggressiveResize = false;
+          baseIndex = 1;
+          clock24 = true;
 
-        set -s escape-time       500
-        set -g history-limit     2000
+          extraConfig = /* conf */ ''
+            set -g status-keys vi
 
-        set -g pane-base-index 1
+            set -s escape-time       500
+            set -g history-limit     2000
 
-        # unbind-key -a # Unbind all keys
-        set -g prefix C-Space
-        bind C-space send-prefix
-      '';
-    };
+            set -g pane-base-index 1
+
+            # unbind-key -a # Unbind all keys
+            set -g prefix C-Space
+            bind C-space send-prefix
+          '';
+        };
+      };
   };
 }

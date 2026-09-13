@@ -109,4 +109,29 @@
       };
     }
   ];
+  # vim.api.nvim_create_autocmd("FileType", {
+  #   pattern = { "html", "tex" },
+  #   callback = function()
+  #     vim.keymap.set("n", "j", "gj", { buffer = true })
+  #     vim.keymap.set("n", "k", "gk", { buffer = true })
+  #   end,
+  # })
+  autoCmd = [
+    {
+      event = [ "FileType" ];
+      pattern = [
+        "html"
+        "tex"
+      ];
+      callback = {
+        __raw = # lua
+          ''
+            function()
+              vim.keymap.set("n", "j", "gj", { buffer = true })
+              vim.keymap.set("n", "k", "gk", { buffer = true })
+            end
+          '';
+      };
+    }
+  ];
 }

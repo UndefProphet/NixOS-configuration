@@ -35,5 +35,8 @@
           ./modules # Nixos Modules
           ./hjem # Hjem modules
         ]
-      );
+      )
+    // {
+      tackInputs = inputs;
+    };
 }

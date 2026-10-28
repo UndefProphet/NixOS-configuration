@@ -1,4 +1,7 @@
 {
+  "$declared": {
+    "palette-nix": "github:undefprophet/palette.nix?ref=main"
+  },
   "disko": {
     "type": "github",
     "owner": "nix-community",
@@ -54,6 +57,14 @@
     "rev": "a9d52e0d2f9fb3fa80ed968ad4a8129051f12585",
     "narHash": "sha256-0tzBVPDBmx1tLoLAKI1uttapmj1tB8sRALeeQAvX4aA=",
     "lastModified": 1791577525
+  },
+  "palette-nix": {
+    "type": "github",
+    "owner": "undefprophet",
+    "repo": "palette.nix",
+    "rev": "07e3edc8d26a9bdd577d2d401868799313294b93",
+    "narHash": "sha256-ybUTPbkkf7nMyX2zmJAgwlqHd/DtWeBA5R0pVsiW9OA=",
+    "lastModified": 1792907584
   },
   "tack": {
     "type": "github",

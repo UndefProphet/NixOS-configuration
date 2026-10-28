@@ -23,6 +23,9 @@ url = "gh:nixos/nixpkgs?ref=nixos-unstable"
 [inputs.nur]
 url = "gh:nix-community/NUR?ref=master"
 
+[inputs.palette-nix]
+url = "gh:undefprophet/palette.nix?ref=main"
+
 [inputs.tack]
 url = "gh:manic-systems/tack"
 

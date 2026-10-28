@@ -16,6 +16,7 @@
           nil
           sops
           inputs'.tack.packages.default
+          inputs'.hjem.packages.hjem
         ];
 
         shellHook = ''

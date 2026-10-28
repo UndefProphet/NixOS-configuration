@@ -17,6 +17,7 @@
 
         collections = {
           core = true;
+          terminal = true;
           graphical-environment = true;
 
           packages = {

@@ -23,9 +23,6 @@
   # Amd cpu support for different programs like btop
   nixpkgs.config.rocmSupport = true;
 
-  # Fan control
-  services.thinkfan.enable = true;
-
   # Battery
   services.power-profiles-daemon.enable = true;
   services.upower.enable = true;

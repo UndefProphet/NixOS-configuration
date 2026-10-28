@@ -124,7 +124,6 @@
         };
       in
       {
-        packages.tack-write = tackWrite;
         apps.tack-write = {
           type = "app";
           meta.description = "Sync tack pins on input changes, can pass switch/boot/test arguments";

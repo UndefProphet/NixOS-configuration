@@ -1,10 +1,9 @@
-{ self, ... }: {
+{ ... }: {
   perSystem =
     {
       pkgs,
-      lib,
       inputs',
-      system,
+      self',
       ...
     }:
     {
@@ -17,11 +16,11 @@
           nil
           sops
           inputs'.tack.packages.default
-          self.packages.${system}.tack-write
         ];
 
         shellHook = ''
           export TACK_DIR=./inputs/
+          alias tack-write="${self'.apps.tack-write.program}"
         '';
       };
     };

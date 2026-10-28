@@ -95,35 +95,16 @@
           {
 
             assertions =
-              let
-                luaOf = section: if section == null then "" else section;
-              in
-              [
-                {
-                  assertion = lib.validators.validateLua (luaOf cfg.sections.globals);
-                  message = "windowManagers.hyprland.startup is not valid Lua";
+              cfg.sections
+              |> lib.mapAttrsToList (
+                name: value: {
+                  assertion = lib.validators.validateLua {
+                    content = (if value == null then "" else value);
+                    fileName = "hyprland-${name}";
+                  };
+                  message = "windowManagers.hyprland.sections.${name} is not valid Lua";
                 }
-                {
-                  assertion = lib.validators.validateLua (luaOf cfg.sections.startup);
-                  message = "windowManagers.hyprland.startup is not valid Lua";
-                }
-                {
-                  assertion = lib.validators.validateLua (luaOf cfg.sections.content);
-                  message = "windowManagers.hyprland.content is not valid Lua";
-                }
-                {
-                  assertion = lib.validators.validateLua (luaOf cfg.sections.keybindings);
-                  message = "windowManagers.hyprland.keybindings is not valid Lua";
-                }
-                {
-                  assertion = lib.validators.validateLua (luaOf cfg.sections.rules);
-                  message = "windowManagers.hyprland.rules is not valid Lua";
-                }
-                {
-                  assertion = lib.validators.validateLua (luaOf cfg.sections.extra);
-                  message = "windowManagers.hyprland.extra is not valid Lua";
-                }
-              ];
+              );
 
             packages = lib.mkMerge [
               (lib.optional cfg.features.hyprmoncfg.enable cfg.features.hyprmoncfg.package)

@@ -6,15 +6,18 @@
     in
     {
       config = lib.mkIf cfg.enable {
-        hj.windowManagers.hyprland.sections.globals =
-          # lua
-          ''
-            terminal    = "kitty"
-            fileManager = "kitty fish -c \"yazi\""
-            menu        = "vicinae toggle"
-            browser     = "glide"
-          '';
+        hj.windowManagers.hyprland.sections.globals = {
+          order = 0;
+          content =
+            # lua
+            ''
+              terminal    = "kitty"
+              fileManager = "kitty fish -c \"yazi\""
+              menu        = "vicinae toggle"
+              browser     = "glide"
+            '';
 
+        };
       };
     };
 }

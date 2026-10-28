@@ -6,7 +6,7 @@
     in
     {
       config = lib.mkIf cfg.enable {
-        hj.windowManagers.hyprland.sections.keybindings =
+        hj.windowManagers.hyprland.sections.keybindings.content =
           # lua
           ''
             local mainMod = "SUPER" -- Sets "Windows" key as main modifier

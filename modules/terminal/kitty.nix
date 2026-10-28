@@ -1,15 +1,15 @@
 { lib, ... }: {
   flake.modules.nixos.kitty =
     {
-    config,
-    pkgs,
-    username,
-    ...
+      config,
+      pkgs,
+      username,
+      ...
     }:
     let
       cfg = config.conf.terminal.kitty;
     in
-      {
+    {
       options.conf.terminal.kitty = {
 
         enable = lib.mkEnableOption {
@@ -19,14 +19,13 @@
       };
 
       config = lib.mkIf cfg.enable {
-        hj.programs.kitty = 
-          {
-            enable = true;
-            # settings = {
-            #   window_padding_width = 10;
-            #   confirm_os_window_close = 0;
-            # };
-          };
+        hj.programs.kitty = {
+          enable = true;
+          # settings = {
+          #   window_padding_width = 10;
+          #   confirm_os_window_close = 0;
+          # };
+        };
       };
     };
 }

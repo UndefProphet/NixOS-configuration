@@ -16,18 +16,15 @@ let
         validators = {
 
           validateLua =
-            content:
+            {
+              content,
+              fileName ? "lua-file",
+            }:
             let
-              luaFile = pkgs.writeText "lua-file.lua" content;
-
+              luaFile = pkgs.writeText "${fileName}.lua" content;
               result = pkgs.runCommand "lua-check" { } ''
-                if ${pkgs.lua}/bin/luac -p ${luaFile}; then
-                  echo valid > $out
-                else
-                  echo "Lua validation failed:" >&2
-                  ${pkgs.lua}/bin/luac -p ${luaFile} >&2
-                  exit 1
-                fi
+                ${pkgs.lua}/bin/luac -p ${luaFile}; 
+                echo valid > $out
               '';
             in
             (builtins.readFile result) == "valid\n";

@@ -6,7 +6,7 @@
     in
     {
       config = lib.mkIf cfg.enable {
-        hj.windowManagers.hyprland.sections.rules =
+        hj.windowManagers.hyprland.sections.rules.content =
           # lua
           ''
             local suppressMaximizeRule = hl.window_rule({

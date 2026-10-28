@@ -12,137 +12,114 @@
 
     in
     {
-      options.windowManagers.hyprland = {
-
-        enable = lib.mkEnableOption {
-          description = "Enable hyprland.";
-        };
-
-        package = lib.mkPackageOption pkgs "hyprland" {
-          nullable = true;
-          extraDescription = "Set this to null if you use the NixOS module to install Hyprland.";
-        };
-
-        portalPackage = lib.mkPackageOption pkgs "xdg-desktop-portal-hyprland" {
-          nullable = true;
-        };
-
-        sections = {
-
-          globals = lib.mkOption {
-            type = lib.types.nullOr lib.types.str;
-            default = null;
-            description = "Global values access from everywhere.";
+      options.windowManagers.hyprland =
+        with lib.types;
+        with lib;
+        {
+          enable = mkEnableOption {
+            description = "Enable hyprland.";
           };
 
-          startup = lib.mkOption {
-            type = lib.types.nullOr lib.types.str;
-            default = null;
-            description = ''
-              Function body of 
-              hl.on("hyprland.start", function () 
-              ...
-              end)
-            '';
+          package = mkPackageOption pkgs "hyprland" {
+            extraDescription = "Set this to null if you use the NixOS module to install Hyprland.";
+            nullable = true;
           };
 
-          content = lib.mkOption {
-            type = lib.types.nullOr lib.types.str;
-            default = null;
-            description = "Main body written in lua";
+          portalPackage = mkPackageOption pkgs "xdg-desktop-portal-hyprland" {
+            nullable = true;
           };
 
-          keybindings = lib.mkOption {
-            type = lib.types.nullOr lib.types.str;
-            default = null;
-            description = "Keybindings written in lua";
-          };
-
-          rules = lib.mkOption {
-            type = lib.types.nullOr lib.types.str;
-            default = null;
-            description = "Rules written in lua";
-          };
-
-          extra = lib.mkOption {
-            type = lib.types.nullOr lib.types.str;
-            default = null;
-            description = "Rules written in lua";
-          };
-        };
-
-        features = {
-
-          hyprmoncfg = {
-
-            enable = lib.mkEnableOption {
-              default = true;
-              description = "Enable monitor management through hyprmoncfg.";
-            };
-
-            package = lib.mkPackageOption pkgs "hyprmoncfg" {
-              nullable = true;
-              extraDescription = "Set this to null if you use the Hjem module to install hyprmoncfg.";
-            };
-          };
-        };
-
-        plugins = { };
-      };
-
-      config = lib.mkIf cfg.enable (
-        lib.mkMerge [
-          {
-
-            assertions =
-              cfg.sections
-              |> lib.mapAttrsToList (
-                name: value: {
-                  assertion = lib.validators.validateLua {
-                    content = (if value == null then "" else value);
-                    fileName = "hyprland-${name}";
+          sections = lib.mkOption {
+            description = "Each section is a file being generated.";
+            type = types.attrsOf (
+              types.submodule {
+                options = {
+                  order = mkOption {
+                    description = "The order to import into hyprland.lua.";
+                    type = int;
+                    default = 99;
                   };
-                  message = "windowManagers.hyprland.sections.${name} is not valid Lua";
-                }
-              );
 
-            packages = lib.mkMerge [
-              (lib.optional cfg.features.hyprmoncfg.enable cfg.features.hyprmoncfg.package)
-            ];
+                  content = lib.mkOption {
+                    description = "Contents of a lua file.";
+                    type = str;
+                  };
+                };
+              }
+            );
+          };
 
-            xdg.config.files."hypr/monitors.lua" = {
+          features = {
+
+            hyprmoncfg = {
+
+              enable = mkEnableOption {
+                description = "Enable monitor management through hyprmoncfg.";
+                default = true;
+              };
+
+              package = mkPackageOption pkgs "hyprmoncfg" {
+                extraDescription = "Set this to null if you use the Hjem module to install hyprmoncfg.";
+                nullable = true;
+              };
+            };
+          };
+
+          plugins = { };
+        };
+
+      config = lib.mkIf cfg.enable {
+
+        assertions =
+          cfg.sections
+          |> lib.mapAttrsToList (
+            name: value: {
+              assertion = lib.validators.validateLua {
+                content = value.content;
+                fileName = "hyprland-${name}";
+              };
+              message = "windowManagers.hyprland.sections.${name} is not valid Lua";
+            }
+          );
+
+        packages = lib.mkMerge [
+          (lib.optional cfg.features.hyprmoncfg.enable cfg.features.hyprmoncfg.package)
+        ];
+
+        environment.sessionVariables = {
+          MOZ_ENABLE_WAYLAND = "1";
+        };
+
+        xdg.config.files = lib.mkMerge [
+          {
+            "hypr/monitors.lua" = {
               type = "copy";
               clobber = false;
               text = "";
             };
 
-            xdg.config.files."hypr/hyprland.lua".text = # lua
+            "hypr/hyprland.lua".text =
+              let
+                files = cfg.sections |> lib.mapAttrsToList (name: value: value // { inherit name; });
+                orderedFiles = files |> builtins.sort (left: right: left.order < right.order);
+              in
+              # lua
               ''
-                  ---- GLOBAL VALUES ----
-                  ${lib.optionalString (cfg.sections.globals != null) cfg.sections.globals}
-                  ${lib.optionalString cfg.features.hyprmoncfg.enable "require(\"monitors\")"}
+                -- Features
+                ${lib.optionalString cfg.features.hyprmoncfg.enable ''require("monitors") -- hyprmoncfg ''}
 
-                ---- STARTUP ----
-                hl.on("hyprland.start", function () 
-                  ${lib.optionalString (cfg.sections.content != null) cfg.sections.startup}
-                  ${lib.optionalString cfg.features.hyprmoncfg.enable "hl.exec_cmd(\"hyprmoncfgd\")"}
-                end)
-
-                  ---- LOOK AND FEEL ----
-                  ${lib.optionalString (cfg.sections.content != null) cfg.sections.content}
-
-                  ---- KEYBINDINGS ----
-                  ${lib.optionalString (cfg.sections.keybindings != null) cfg.sections.keybindings}
-
-                  ---- extra ----
-                  ${lib.optionalString (cfg.sections.extra != null) cfg.sections.extra}
+                -- Files (user defined section files)
+                ${lib.concatMapStringsSep "\n" (value: ''require("files.${value.name}")'') orderedFiles}
               '';
-
-            environment.sessionVariables = {
-              MOZ_ENABLE_WAYLAND = "1";
-            };
           }
-        ]
-      );
+
+          # Generate the user defined section files
+          (
+            cfg.sections
+            |> lib.mapAttrs' (name: value: lib.nameValuePair "hypr/files/${name}.lua" { text = value.content; })
+          )
+        ];
+
+      };
     };
 }

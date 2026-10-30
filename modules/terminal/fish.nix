@@ -7,7 +7,7 @@
       ...
     }:
     let
-      cfg = config.terminal.fish;
+      cfg = config.conf.terminal.fish;
     in
     {
       options.conf.terminal.fish = {
@@ -18,22 +18,16 @@
 
       };
 
-      config = {
+      config = lib.mkIf cfg.enable {
 
         users.users."${username}".shell = pkgs.fish;
         programs.fish.enable = true;
 
-        # hj = {
-        #   programs.fish = {
-        #     enable = config.programs.fish.enable;
-        #     # shellInit = ''
-        #     # tmux
-        #     # '';
-        #     functions = {
-        #       fish_greeting = "";
-        #     };
-        #   };
-        # };
+        hj.programs.fish = {
+          enable = true;
+          functions.fish_greeting = "";
+        };
+
       };
     };
 }

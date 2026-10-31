@@ -26,6 +26,25 @@
         hj.programs.fish = {
           enable = true;
           functions.fish_greeting = "";
+
+          shellAliases = {
+            g = "git";
+            l = "ls -la";
+          };
+
+          shellAbbrs = {
+            gco = "git checkout";
+            gs = "git status";
+            gp = "git pull";
+            gca = {
+              position = "anywhere";
+              expansion = "git commit -am";
+            };
+          };
+
+          functions = { };
+          binds = { };
+          plugins = [ ];
         };
 
       };

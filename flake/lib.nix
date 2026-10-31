@@ -30,6 +30,20 @@ let
             (builtins.readFile result) == "valid\n";
 
         };
+
+        pretty = {
+          jsonText =
+            text:
+            builtins.readFile (
+              pkgs.runCommand "pretty-json"
+                {
+                  nativeBuildInputs = [ pkgs.jq ];
+                }
+                ''
+                  echo '${text}' | jq . > $out
+                ''
+            );
+        };
       }
     );
 

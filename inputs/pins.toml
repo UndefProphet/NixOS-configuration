@@ -10,12 +10,12 @@ url = "gh:hercules/flake-parts?ref=main"
 [inputs.hjem]
 url = "gh:feel-co/hjem?ref=main"
 
-[inputs.hyprland-scroll-overview]
-type = "fetch"
-url = "gh:yayuuu/hyprland-scroll-overview"
-
 [inputs.import-tree]
 url = "gh:denful/import-tree?ref=main"
+
+[inputs.nixos-credentials]
+type = "fetch"
+url = "git+ssh://git@github.com/UndefProphet/.nixos.credentials?ref=hjem-move"
 
 [inputs.nixpkgs]
 url = "gh:nixos/nixpkgs?ref=nixos-unstable"
@@ -25,6 +25,9 @@ url = "gh:nix-community/NUR?ref=master"
 
 [inputs.palette-nix]
 url = "gh:undefprophet/palette.nix?ref=main"
+
+[inputs.sops-nix]
+url = "gh:Mic92/sops-nix?ref=master"
 
 [inputs.tack]
 url = "gh:manic-systems/tack"

@@ -1,6 +1,8 @@
 {
   "$declared": {
-    "palette-nix": "github:undefprophet/palette.nix?ref=main"
+    "nixos-credentials": "git+ssh://git@github.com/UndefProphet/.nixos.credentials?ref=hjem-move",
+    "palette-nix": "github:undefprophet/palette.nix?ref=main",
+    "sops-nix": "github:Mic92/sops-nix?ref=master"
   },
   "disko": {
     "type": "github",
@@ -26,14 +28,6 @@
     "narHash": "sha256-BohcZsIqBOd6YL6+jUkdM4GE+aQc72E6yrqVyt1z5X4=",
     "lastModified": 1793026809
   },
-  "hyprland-scroll-overview": {
-    "type": "github",
-    "owner": "yayuuu",
-    "repo": "hyprland-scroll-overview",
-    "rev": "6b59bd8bfaec54ceba2d2e2add2dde114d277b9b",
-    "narHash": "sha256-m/hCIJmg0adw7Df0hFlOskLqo5Iy1KZ1MvbcvuOlAcs=",
-    "lastModified": 1792642480
-  },
   "import-tree": {
     "type": "github",
     "owner": "denful",
@@ -41,6 +35,14 @@
     "rev": "eb1b52eaecc57f7c136d07ae8a93e724dfecac46",
     "narHash": "sha256-ljEMTXP/rH0tOvDzc9gzwww6KcHRPRnEHzd9lK48V7s=",
     "lastModified": 1788467110
+  },
+  "nixos-credentials": {
+    "type": "git",
+    "url": "ssh://git@github.com/UndefProphet/.nixos.credentials",
+    "ref": "refs/heads/hjem-move",
+    "rev": "684eaa3e7d7e61b7557e6c341dc07dd1ac2ddcb2",
+    "narHash": "sha256-iUMS2BOzmFyJhxT8coxpERFTaD2M1goOVGMoi240azo=",
+    "lastModified": 1793339880
   },
   "nixpkgs": {
     "type": "github",
@@ -65,6 +67,14 @@
     "rev": "07e3edc8d26a9bdd577d2d401868799313294b93",
     "narHash": "sha256-ybUTPbkkf7nMyX2zmJAgwlqHd/DtWeBA5R0pVsiW9OA=",
     "lastModified": 1792907584
+  },
+  "sops-nix": {
+    "type": "github",
+    "owner": "Mic92",
+    "repo": "sops-nix",
+    "rev": "60182817ee048ac94b4c68ea76d5ef2e8aac730d",
+    "narHash": "sha256-Y/JIHTnMlOabDfyaSBubWGLDIVGihLEUuoMhFvQKaDo=",
+    "lastModified": 1793052255
   },
   "tack": {
     "type": "github",

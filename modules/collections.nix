@@ -8,6 +8,7 @@
       options.collections = {
         core = lib.mkEnableOption { };
         terminal = lib.mkEnableOption { };
+        neural-garbage = lib.mkEnableOption { };
         graphical-environment = lib.mkEnableOption { };
 
         packages = {
@@ -45,6 +46,12 @@
 
         (lib.mkIf cfg.graphical-environment {
           conf.environment.hyprland.enable = lib.mkDefault true;
+        })
+
+        (lib.mkIf cfg.neural-garbage {
+          conf.programs = {
+            opencode.enable = true;
+          };
         })
 
         # Packages

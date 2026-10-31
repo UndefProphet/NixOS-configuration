@@ -18,6 +18,7 @@
         collections = {
           core = true;
           terminal = true;
+          neural-garbage = true;
           graphical-environment = true;
 
           packages = {

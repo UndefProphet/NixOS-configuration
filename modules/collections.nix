@@ -34,7 +34,7 @@
           conf.system.nix.enable = lib.mkDefault true;
           conf.boot.grub.enable = lib.mkDefault true;
           conf.user.enable = lib.mkDefault true;
-          conf.system.sudo-rs.enable = lib.mkDefault true;
+          conf.system.run0.enable = lib.mkDefault true;
           conf.system.kmscon.enable = lib.mkDefault true;
           conf.networking.enable = lib.mkDefault true;
         })

@@ -13,7 +13,7 @@
     {
       config,
       lib,
-    username,
+      username,
       ...
     }:
     {

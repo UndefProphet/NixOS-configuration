@@ -4,21 +4,31 @@
     {
 
       config = {
-        # Your normal machine configuration goes here (no autologin, no extra startup command)
-        # environment.systemPackages = [ ... ];
 
-        # This block ONLY triggers when built with 'build-vm'
         virtualisation.vmVariant = {
-          # 1. Enable autologin inside the VM only
-          services.getty.autologinUser = username;
 
-          # 2. Run the command inside the VM only
+          services.getty.autologinUser = username;
           environment.loginShellInit = ''
             if [ "$(tty)" = "/dev/tty1" ]; then
               echo "Testing inside the build-vm environment..."
-              start-hyprland
+              # start-hyprland
             fi
           '';
+
+          # The host key is shared into a system path; mounting it inside the
+          # home directory would leave root-owned dirs there, breaking hjem.
+          virtualisation.sharedDirectories.sops-age-keys = {
+            source = "${config.hj.xdg.config.directory}/sops/age";
+            target = "/var/lib/sops/age";
+          };
+
+          # User creation and sops secret decryption run in the initrd, so the
+          # key share must be mounted there already.
+          fileSystems."/var/lib/sops/age".neededForBoot = true;
+          boot.initrd.availableKernelModules = [ "virtiofs" ];
+
+          sops.age.keyFile = lib.mkForce "/var/lib/sops/age/keys.txt";
+
         };
       };
 

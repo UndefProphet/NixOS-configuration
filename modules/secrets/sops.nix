@@ -23,9 +23,13 @@
 
       # Sops config
       sops = {
-        defaultSopsFile = ./secrets/master.yaml;
         defaultSopsFormat = "yaml";
-        age.keyFile = "${config.hj.xdg.config}/.config/sops/age/keys.txt";
+        age.keyFile = "${config.hj.xdg.config.directory}/sops/age/keys.txt";
+        age.generateKey = true;
+        secrets."linux-password" = {
+          sopsFile = ./linux.yaml;
+          neededForUsers = true;
+        };
       };
     };
 }

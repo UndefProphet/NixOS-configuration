@@ -48,6 +48,7 @@
 
         (lib.mkIf cfg.graphical-environment {
           conf.environment.hyprland.enable = lib.mkDefault true;
+          conf.system.audio.enable = lib.mkDefault true;
         })
 
         (lib.mkIf cfg.neural-garbage {

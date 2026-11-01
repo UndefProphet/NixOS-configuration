@@ -44,6 +44,7 @@
             fish.enable = true;
             kitty.enable = true;
           };
+          conf.programs.yazi.enable = true;
         })
 
         (lib.mkIf cfg.graphical-environment {

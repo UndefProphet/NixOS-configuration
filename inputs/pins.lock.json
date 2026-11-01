@@ -1,6 +1,7 @@
 {
   "$declared": {
     "nixos-credentials": "git+ssh://git@github.com/UndefProphet/.nixos.credentials?ref=hjem-move",
+    "nixvim": "github:nix-community/nixvim",
     "palette-nix": "github:undefprophet/palette.nix?ref=main",
     "sops-nix": "github:Mic92/sops-nix?ref=master"
   },
@@ -51,6 +52,14 @@
     "rev": "3ec636362e1816bc2f0888fa0fa2c69f1bc9e504",
     "narHash": "sha256-rZLrzrC6i+jnTAlvPZHogKDulY7WWDEv9hJeHieO7Zw=",
     "lastModified": 1792773339
+  },
+  "nixvim": {
+    "type": "github",
+    "owner": "nix-community",
+    "repo": "nixvim",
+    "rev": "453dc9c5037e6d1bec81d2a51ddacd58a2f44e9c",
+    "narHash": "sha256-yJ072hxngo/srNdLTp4BlFeo0hedwnKicI3TGlSXLFE=",
+    "lastModified": 1792203519
   },
   "nur": {
     "type": "github",

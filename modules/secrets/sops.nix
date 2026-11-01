@@ -13,6 +13,7 @@
     {
       config,
       lib,
+    username,
       ...
     }:
     {
@@ -26,10 +27,22 @@
         defaultSopsFormat = "yaml";
         age.keyFile = "${config.hj.xdg.config.directory}/sops/age/keys.txt";
         age.generateKey = true;
+
         secrets."linux-password" = {
           sopsFile = ./linux.yaml;
           neededForUsers = true;
         };
+
+        secrets."mcp/context7" = {
+          sopsFile = ./agent.yaml;
+          owner = username;
+        };
+
+        secrets."mcp/tavily" = {
+          sopsFile = ./agent.yaml;
+          owner = username;
+        };
+
       };
     };
 }

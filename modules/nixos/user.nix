@@ -19,13 +19,21 @@
 
       config = lib.mkIf cfg.enable {
         users = {
-          mutableUsers = true;
-          users."${username}" = {
-            isNormalUser = true;
-            group = username;
-            description = username;
-            initialPassword = "12345";
+          mutableUsers = false;
+          users = {
+            # Root user
+            root.hashedPasswordFile = config.sops.secrets."linux-password".path;
+
+            # Main user
+            "${username}" = {
+              isNormalUser = true;
+              group = username;
+              description = username;
+              extraGroups = [ "wheel" ];
+              hashedPasswordFile = config.sops.secrets."linux-password".path;
+            };
           };
+
           groups.${username} = { };
         };
 

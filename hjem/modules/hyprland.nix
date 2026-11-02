@@ -31,22 +31,26 @@
 
           sections = lib.mkOption {
             description = "Each section is a file being generated.";
-            type = types.attrsOf (
-              types.submodule {
-                options = {
-                  order = mkOption {
-                    description = "The order to import into hyprland.lua.";
-                    type = int;
-                    default = 99;
-                  };
+            type = listOf (submodule {
+              options = {
 
-                  content = lib.mkOption {
-                    description = "Contents of a lua file.";
-                    type = str;
-                  };
+                name = lib.mkOption {
+                  description = "Name of the lua file.";
+                  type = str;
                 };
-              }
-            );
+
+                order = mkOption {
+                  description = "The order to import into hyprland.lua.";
+                  type = int;
+                  default = 99;
+                };
+
+                content = lib.mkOption {
+                  description = "Contents of a lua file.";
+                  type = lines;
+                };
+              };
+            });
           };
 
           features = {
@@ -72,13 +76,17 @@
 
         assertions =
           cfg.sections
-          |> lib.mapAttrsToList (
-            name: value: {
+          |> map (
+            value:
+            let
+              fileName = "hyprland-${value.name}";
+            in
+            {
               assertion = lib.validators.validateLua {
                 content = value.content;
-                fileName = "hyprland-${name}";
+                inherit fileName;
               };
-              message = "windowManagers.hyprland.sections.${name} is not valid Lua";
+              message = "windowManagers.hyprland.sections.${value.name} is not valid Lua";
             }
           );
 
@@ -100,8 +108,7 @@
 
             "hypr/hyprland.lua".text =
               let
-                files = cfg.sections |> lib.mapAttrsToList (name: value: value // { inherit name; });
-                orderedFiles = files |> builtins.sort (left: right: left.order < right.order);
+                orderedSections = cfg.sections |> builtins.sort (left: right: left.order < right.order);
               in
               # lua
               ''
@@ -116,15 +123,18 @@
                 }
 
                 -- Files (user defined section files)
-                ${lib.concatMapStringsSep "\n" (value: ''require("files.${value.name}")'') orderedFiles}
+                ${lib.concatMapStringsSep "\n" (value: ''require("files/${value.name}")'') orderedSections}
               '';
           }
 
-          # Generate the user defined section files
-          (
-            cfg.sections
-            |> lib.mapAttrs' (name: value: lib.nameValuePair "hypr/files/${name}.lua" { text = value.content; })
-          )
+          (builtins.listToAttrs (
+            map (
+              value:
+              lib.nameValuePair "hypr/files/${value.name}.lua" {
+                text = value.content;
+              }
+            ) cfg.sections
+          ))
         ];
 
       };

@@ -39,6 +39,7 @@ in
           lib = extendedLib pkgs;
           inherit
             self'
+            inputs
             inputs'
             ;
         };

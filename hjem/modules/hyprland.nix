@@ -105,8 +105,15 @@
               in
               # lua
               ''
-                -- Features
-                ${lib.optionalString cfg.features.hyprmoncfg.enable ''require("monitors") -- hyprmoncfg ''}
+                ${lib.optionalString cfg.features.hyprmoncfg.enable # lua
+                  ''
+                    -- hyprmoncfg
+                    require("monitors")
+                    hl.on("hyprland.start", function ()
+                      hl.exec_cmd("${pkgs.hyprmoncfg}/bin/hyprmoncfgd --monitors-conf ${config.xdg.config.directory}/hypr/monitors.lua")
+                    end)
+                  ''
+                }
 
                 -- Files (user defined section files)
                 ${lib.concatMapStringsSep "\n" (value: ''require("files.${value.name}")'') orderedFiles}

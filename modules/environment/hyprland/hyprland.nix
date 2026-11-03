@@ -25,11 +25,11 @@
 
           # One `{ lib, pkgs, ... }: { name; order; content; }` module per
           # section file; discovered automatically.
-          sections =
-            builtins.readDir ./_sections
+          files =
+            builtins.readDir ./_files
             |> lib.filterAttrs (_: type: type == "regular")
             |> lib.attrNames
-            |> map (name: import ./_sections/${name} { inherit lib pkgs; });
+            |> map (name: import ./_files/${name} { inherit lib pkgs; });
 
           features = {
             hyprmoncfg = {

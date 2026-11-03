@@ -29,7 +29,7 @@
             nullable = true;
           };
 
-          sections = lib.mkOption {
+          files = lib.mkOption {
             description = "Each section is a file being generated.";
             type = listOf (submodule {
               options = {
@@ -75,7 +75,7 @@
       config = lib.mkIf cfg.enable {
 
         assertions =
-          cfg.sections
+          cfg.files
           |> map (
             value:
             let
@@ -86,7 +86,7 @@
                 content = value.content;
                 inherit fileName;
               };
-              message = "windowManagers.hyprland.sections.${value.name} is not valid Lua";
+              message = "windowManagers.hyprland.files.${value.name} is not valid Lua";
             }
           );
 
@@ -108,7 +108,7 @@
 
             "hypr/hyprland.lua".text =
               let
-                orderedSections = cfg.sections |> builtins.sort (left: right: left.order < right.order);
+                orderedFiles = cfg.files |> builtins.sort (left: right: left.order < right.order);
               in
               # lua
               ''
@@ -123,7 +123,7 @@
                 }
 
                 -- Files (user defined section files)
-                ${lib.concatMapStringsSep "\n" (value: ''require("files/${value.name}")'') orderedSections}
+                ${lib.concatMapStringsSep "\n" (value: ''require("files/${value.name}")'') orderedFiles}
               '';
           }
 
@@ -133,7 +133,7 @@
               lib.nameValuePair "hypr/files/${value.name}.lua" {
                 text = value.content;
               }
-            ) cfg.sections
+            ) cfg.files
           ))
         ];
 

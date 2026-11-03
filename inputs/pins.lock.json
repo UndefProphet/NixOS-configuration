@@ -1,5 +1,6 @@
 {
   "$declared": {
+    "glide-browser": "github:glide-browser/glide.nix",
     "nixos-credentials": "git+ssh://git@github.com/UndefProphet/.nixos.credentials?ref=hjem-move",
     "nixvim": "github:nix-community/nixvim",
     "palette-nix": "github:undefprophet/palette.nix?ref=main",
@@ -20,6 +21,14 @@
     "rev": "31729ca8cbdb4fa927b34e5f4353e6a83f39e993",
     "narHash": "sha256-glZLQlzIn1fXH6PazR2iUmTo7kzzyYSshrWhLS9TqCU=",
     "lastModified": 1788450739
+  },
+  "glide-browser": {
+    "type": "github",
+    "owner": "glide-browser",
+    "repo": "glide.nix",
+    "rev": "d5725b07982374282336e29c9aa17157e477e5c8",
+    "narHash": "sha256-e4MNi8eB64VPnCRAcDziSSFdyVOzpgi4vPa6Tbc8ii8=",
+    "lastModified": 1792621440
   },
   "hjem": {
     "type": "github",

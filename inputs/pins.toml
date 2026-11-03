@@ -26,6 +26,9 @@ url = "gh:nix-community/nixvim"
 [inputs.nur]
 url = "gh:nix-community/NUR?ref=master"
 
+[inputs.glide-browser]
+url = "gh:glide-browser/glide.nix"
+
 [inputs.palette-nix]
 url = "gh:undefprophet/palette.nix?ref=main"
 

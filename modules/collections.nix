@@ -8,6 +8,7 @@
       options.collections = {
         core = lib.mkEnableOption { };
         terminal = lib.mkEnableOption { };
+        ssh = lib.mkEnableOption { };
         neural-garbage = lib.mkEnableOption { };
         graphical-environment = lib.mkEnableOption { };
 
@@ -46,6 +47,14 @@
           };
           conf.programs.neovim.enable = true;
           conf.programs.yazi.enable = true;
+        })
+
+        (lib.mkIf cfg.ssh {
+          conf.networking.ssh = {
+            enable = lib.mkDefault true;
+            enableAgent = lib.mkDefault true;
+            enableServer = lib.mkDefault true;
+          };
         })
 
         (lib.mkIf cfg.graphical-environment {

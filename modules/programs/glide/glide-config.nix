@@ -11,7 +11,6 @@
             // Navigation
             glide.keymaps.set("normal", "<C-h>", "back");
             glide.keymaps.set("normal", "<C-l>", "forward");
-
           '';
       };
     };

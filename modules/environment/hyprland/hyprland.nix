@@ -29,7 +29,7 @@
             builtins.readDir ./_files
             |> lib.filterAttrs (_: type: type == "regular")
             |> lib.attrNames
-            |> map (name: import ./_files/${name} { inherit lib pkgs; });
+            |> map (name: import ./_files/${name} { inherit config lib pkgs; });
 
           features = {
             hyprmoncfg = {

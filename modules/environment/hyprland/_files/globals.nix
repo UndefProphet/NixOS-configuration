@@ -5,7 +5,7 @@
     ''
       terminal    = "kitty"
       fileManager = "kitty fish -c \"yazi\""
-      menu        = "vicinae toggle"
+      menu        = "${lib.getExe pkgs.vicinae} toggle"
       browser     = "glide"
     '';
 

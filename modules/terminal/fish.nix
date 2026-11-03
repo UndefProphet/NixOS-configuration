@@ -30,6 +30,28 @@
           shellAliases = {
             g = "git";
             l = "ls -la";
+
+            # Vim to NVim
+            v = "nvim";
+            vi = "nvim";
+            vim = "nvim";
+
+            y = "yazi";
+
+            # Utilities
+            disks = lib.getExe pkgs.disktui;
+            audio = lib.getExe pkgs.wiremix;
+            music = lib.getExe pkgs.cliamp;
+            wifi = lib.getExe pkgs.impala;
+            bluetooth = lib.getExe pkgs.bluetui;
+
+            rm = "${pkgs.trash-cli}/bin/trash";
+
+            # Improvements
+            # ls = "lsd -lhFXN";
+            open = "xdg-open";
+            cat = "${pkgs.bat}/bin/bat";
+            # cd = "z"; # Zoxide alias
           };
 
           shellAbbrs = {
@@ -40,6 +62,7 @@
               position = "anywhere";
               expansion = "git commit -am";
             };
+
           };
 
           functions = { };

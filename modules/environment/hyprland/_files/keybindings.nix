@@ -3,6 +3,13 @@
   content =
     # lua
     ''
+      hl.config({
+        binds = {
+          -- Allow for scrolling while fullscreen
+          movefocus_cycles_fullscreen = true,
+        },
+      })
+
       -- Helper functions
       local function tiledOrFloating(tiled, floating)
         return function()
@@ -29,7 +36,7 @@
         function() hl.dispatch(hl.dsp.window.cycle_next({ floating = false, tiled = true })) end
       ))
       hl.bind(mainMod .. " + space", hl.dsp.exec_cmd(menu))
-      hl.bind(mainMod .. " + F", hl.dsp.window.fullscreen({ mode = "fullscreen", action = "toggle", layout_aware = false }))
+      hl.bind(mainMod .. " + F", hl.dsp.window.fullscreen({ mode = "fullscreen", action = "toggle", layout_aware = true}))
       hl.bind(mainMod .. " + SHIFT + H", hl.dsp.window.tag({ tag = "hidden" }))
 
       hl.bind(mainMod .. " + H", hl.dsp.focus({ direction = "left" }))

@@ -19,7 +19,7 @@
 
       # Profiles root patched into glide's nsXREDirProvider; native messaging
       # hosts live outside of it under `.glide-browser`.
-      profilesPath = ".config/glide/glide";
+      profilesPath = "glide/glide";
       nativeHostsPath = ".glide-browser/native-messaging-hosts";
       extensionsPath = "extensions/{ec8030f7-c20a-464f-9b0e-13a3a9e97384}";
 
@@ -299,7 +299,7 @@
           })
 
           (lib.mkIf (cfg.profiles != { }) {
-            files = {
+            xdg.config.files = {
               "${profilesPath}/profiles.ini".text =
                 let
                   profileEntries =

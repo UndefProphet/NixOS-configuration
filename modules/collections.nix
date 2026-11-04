@@ -83,7 +83,9 @@
             recording = lib.mkDefault true;
           };
         })
-        (lib.mkIf cfg.packages.gaming { })
+        (lib.mkIf cfg.packages.gaming {
+          conf.gaming.steam.enable = lib.mkDefault true;
+        })
         (lib.mkIf cfg.packages.nix-utilities { })
         (lib.mkIf cfg.packages.wayland-utilities { })
       ];

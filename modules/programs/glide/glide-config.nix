@@ -11,6 +11,13 @@
             // Navigation
             glide.keymaps.set("normal", "<C-h>", "back");
             glide.keymaps.set("normal", "<C-l>", "forward");
+
+            // Tabs
+            glide.keymaps.set("normal", "d", "tab_close");
+            glide.keymaps.set("normal", "u", "tab_reopen");
+
+            // Generic
+            glide.keymaps.set("normal", "U", "tab_reopen");
           '';
       };
     };

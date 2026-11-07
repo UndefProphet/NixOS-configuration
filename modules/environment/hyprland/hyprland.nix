@@ -32,9 +32,8 @@
             |> map (name: import ./_files/${name} { inherit config lib pkgs; });
 
           features = {
-            hyprmoncfg = {
-              enable = true;
-            };
+            standardEnvrionmentVariables = true;
+            hyprmoncfg.enable = true;
           };
         };
 

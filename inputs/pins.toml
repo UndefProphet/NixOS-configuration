@@ -35,6 +35,9 @@ url = "gh:undefprophet/palette.nix?ref=main"
 [inputs.sops-nix]
 url = "gh:Mic92/sops-nix?ref=master"
 
+[inputs.spicetify]
+url = "gh:Gerg-L/spicetify-nix"
+
 [inputs.tack]
 url = "gh:manic-systems/tack"
 

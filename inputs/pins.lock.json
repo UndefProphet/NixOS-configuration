@@ -4,7 +4,8 @@
     "nixos-credentials": "git+ssh://git@github.com/UndefProphet/.nixos.credentials?ref=hjem-move",
     "nixvim": "github:nix-community/nixvim",
     "palette-nix": "github:undefprophet/palette.nix?ref=main",
-    "sops-nix": "github:Mic92/sops-nix?ref=master"
+    "sops-nix": "github:Mic92/sops-nix?ref=master",
+    "spicetify": "github:Gerg-L/spicetify-nix"
   },
   "disko": {
     "type": "github",
@@ -93,6 +94,14 @@
     "rev": "60182817ee048ac94b4c68ea76d5ef2e8aac730d",
     "narHash": "sha256-Y/JIHTnMlOabDfyaSBubWGLDIVGihLEUuoMhFvQKaDo=",
     "lastModified": 1793052255
+  },
+  "spicetify": {
+    "type": "github",
+    "owner": "Gerg-L",
+    "repo": "spicetify-nix",
+    "rev": "13e6fed4eb99f809d390fb50f591bed6cb716dc0",
+    "narHash": "sha256-a+za5QCDlOe/PsuMlZiBcQ13cyiyOscK17BAJFu1/dE=",
+    "lastModified": 1793662659
   },
   "tack": {
     "type": "github",

@@ -75,7 +75,9 @@
         })
 
         # Packages
-        (lib.mkIf cfg.packages.generic { })
+        (lib.mkIf cfg.packages.generic {
+          conf.programs.spicetify.enable = lib.mkDefault true;
+        })
         (lib.mkIf cfg.packages.createive.enable {
           collections.packages.creative = {
             audio = lib.mkDefault true;

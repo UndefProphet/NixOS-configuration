@@ -16,7 +16,8 @@
           workspace = "special:magic"
         },
         no_screen_share = true;
-        border_color = "#fff033 #ff0d2d";
+        -- border_color = "#fff033 #ff0d2d";
+        border_color = hiddenFocusedColor .. " " .. hiddenColor;
       })
 
       -- Hidden
@@ -25,7 +26,8 @@
           tag = "hidden",
         },
         no_screen_share = true;
-        border_color = "#fff033 #ff0d2d";
+        -- border_color = "#fff033 #ff0d2d";
+        border_color = hiddenFocusedColor .. " " .. hiddenColor;
       })
 
       local hideClass = {

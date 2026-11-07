@@ -75,7 +75,7 @@
           cfg.settings
           |> lib.mapAttrs' (
             name: value:
-            lib.nameValuePair "yazi/${name}" {
+            lib.nameValuePair "yazi/${name}.toml" {
               inherit value;
               generator = tomlFormat.generate "yazi-${name}";
             }

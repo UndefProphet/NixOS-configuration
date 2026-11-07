@@ -32,54 +32,54 @@
                 sort_dir_first = true;
                 # linemode = "size_and_mtime";
               };
+            };
 
-              theme = {
-                indicator = {
-                  padding = {
-                    open = "▐";
-                    close = "▌";
-                  };
+            theme = {
+              indicator = {
+                padding = {
+                  open = "▐";
+                  close = "▌";
                 };
+              };
 
-                status = {
-                  sep_right = {
-                    open = "▐";
-                    close = "";
-                  };
-                  sep_left = {
-                    open = "";
-                    close = "▌";
-                  };
+              status = {
+                sep_right = {
+                  open = "▐";
+                  close = "";
+                };
+                sep_left = {
+                  open = "";
+                  close = "▌";
                 };
               };
             };
-
-            # plugins = with pkgs.yaziPlugins; {
-            #   inherit piper;
-            #   inherit toggle-pane;
-            #
-            #   starship = {
-            #     package = starship;
-            #     setup = true;
-            #     settings = {
-            #       config_file = config.programs.starship.configPath;
-            #     };
-            #   };
-            #
-            #   full-border = {
-            #     package = full-border;
-            #     setup = true;
-            #     settings = {
-            #       type = lib.mkLuaInline "ui.Border.PLAIN";
-            #     };
-            #   };
-            #
-            #   ouch = {
-            #     package = ouch;
-            #     setup = false;
-            #   };
-            # };
           };
+
+          # plugins = with pkgs.yaziPlugins; {
+          #   inherit piper;
+          #   inherit toggle-pane;
+          #
+          #   starship = {
+          #     package = starship;
+          #     setup = true;
+          #     settings = {
+          #       config_file = config.programs.starship.configPath;
+          #     };
+          #   };
+          #
+          #   full-border = {
+          #     package = full-border;
+          #     setup = true;
+          #     settings = {
+          #       type = lib.mkLuaInline "ui.Border.PLAIN";
+          #     };
+          #   };
+          #
+          #   ouch = {
+          #     package = ouch;
+          #     setup = false;
+          #   };
+          # };
         };
       };
     };

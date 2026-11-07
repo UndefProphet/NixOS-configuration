@@ -21,7 +21,12 @@
       options.conf.programs.neovim = {
 
         enable = lib.mkEnableOption {
-          description = "Enable neovim";
+          description = "Enable neovim.";
+        };
+
+        defaultEditor = lib.mkEnableOption {
+          description = "Set as default terminal editor.";
+          default = true;
         };
 
       };
@@ -30,6 +35,11 @@
         hj.packages = [
           self'.packages.neovim
         ];
+
+        hj.environment.sessionVariables = lib.mkIf cfg.defaultEditor {
+          EDITOR = "nvim";
+          VISUAL = "nvim";
+        };
       };
     };
 

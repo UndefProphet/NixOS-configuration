@@ -124,7 +124,7 @@
     }
     {
       mode = "n";
-      key = "<leader>fb";
+      key = "<leader><Space>";
       action = "<cmd>Telescope buffers<CR>";
       options.desc = "Telescope buffers";
     }

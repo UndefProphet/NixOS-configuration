@@ -55,11 +55,19 @@
 
           features = {
 
+            standardEnvrionmentVariables = mkEnableOption {
+              description = "Enable variables for programs";
+            };
+
+            # xdph = {
+            #
+            # };
+
             hyprmoncfg = {
 
               enable = mkEnableOption {
                 description = "Enable monitor management through hyprmoncfg.";
-                default = true;
+                default = false;
               };
 
               package = mkPackageOption pkgs "hyprmoncfg" {
@@ -94,10 +102,6 @@
           (lib.optional cfg.features.hyprmoncfg.enable cfg.features.hyprmoncfg.package)
         ];
 
-        environment.sessionVariables = {
-          MOZ_ENABLE_WAYLAND = "1";
-        };
-
         xdg.config.files = lib.mkMerge [
           {
             "hypr/monitors.lua" = {
@@ -106,12 +110,21 @@
               text = "";
             };
 
-            "hypr/hyprland.lua".text =
+            "hypr/hyprland.lua".text = # lua
               let
                 orderedFiles = cfg.files |> builtins.sort (left: right: left.order < right.order);
               in
-              # lua
               ''
+                ${lib.optionalString cfg.features.standardEnvrionmentVariables # lua
+                  ''
+                    -- Envrionment variavbles
+                    hl.env("XDG_CURRENT_DESKTOP", "Hyprland")
+                    hl.env("XDG_SESSION_DESKTOP", "Hyprland")
+                    hl.env("XDG_SESSION_TYPE", "wayland")
+                    hl.env("NIXOS_OZONE_WL", "1")
+                  ''
+                }
+
                 ${lib.optionalString cfg.features.hyprmoncfg.enable # lua
                   ''
                     -- hyprmoncfg

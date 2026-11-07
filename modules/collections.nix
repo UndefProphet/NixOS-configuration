@@ -65,6 +65,7 @@
 
           # Programs
           conf.programs.glide.enable = lib.mkDefault true;
+          conf.programs.zathura.enable = lib.mkDefault true;
         })
 
         (lib.mkIf cfg.neural-garbage {

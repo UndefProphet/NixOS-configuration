@@ -35,6 +35,13 @@
             };
 
             theme = {
+
+              mgr = {
+                border_style = {
+                  crossed = true;
+                };
+              };
+
               indicator = {
                 padding = {
                   open = "▐";

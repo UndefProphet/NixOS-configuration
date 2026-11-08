@@ -25,7 +25,7 @@
 
         defaultEditor = lib.mkEnableOption {
           description = "Set as default terminal editor.";
-          default = true;
+          default = false;
         };
 
       };

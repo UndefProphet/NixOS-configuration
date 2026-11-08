@@ -45,7 +45,10 @@
             fish.enable = true;
             kitty.enable = true;
           };
-          conf.programs.neovim.enable = true;
+          conf.programs.neovim = {
+            enable = true;
+            defaultEditor = true;
+          };
           conf.programs.yazi.enable = true;
         })
 

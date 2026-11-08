@@ -45,7 +45,7 @@
   };
 
   # Battery
-  services.power-profiles-daemon.enable = true;
+  services.power-profiles-daemon.enable = false;
   services.upower.enable = true;
   services.displayManager.ly = {
     settings = {
@@ -54,7 +54,7 @@
   };
 
   services.tlp = {
-    enable = false;
+    enable = true;
     settings = {
       CPU_SCALING_GOVERNOR_ON_AC = "balancepower";
       CPU_SCALING_GOVERNOR_ON_BAT = "powersave";

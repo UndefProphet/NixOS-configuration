@@ -202,6 +202,7 @@
       pattern = [
         "html"
         "tex"
+        "typst"
       ];
       callback = {
         __raw = # lua

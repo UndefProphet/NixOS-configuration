@@ -16,6 +16,7 @@
       formatters_by_ft = {
         nix = [ "nixfmt" ];
         lua = [ "stylua" ];
+        python = [ "black" ];
       };
     };
   };

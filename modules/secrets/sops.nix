@@ -27,6 +27,7 @@
         defaultSopsFormat = "yaml";
         age.keyFile = "${config.hj.xdg.config.directory}/sops/age/keys.txt";
         age.generateKey = true;
+        useSystemdActivation = true;
 
         secrets."linux-password" = {
           sopsFile = ./linux.yaml;

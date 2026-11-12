@@ -37,7 +37,7 @@
                 type = "remote";
                 url = "https://mcp.context7.com/mcp";
                 headers = {
-                  "CONTEXT7_API_KEY" = config.sops.secrets."mcp/context7".path;
+                  "CONTEXT7_API_KEY" = "{file:${config.sops.secrets."mcp/context7".path}}";
                 };
               };
 
@@ -51,7 +51,7 @@
                 ];
                 url = "https://mcp.tavily.com/mcp";
                 environment = {
-                  TAVILY_API_KEY = config.sops.secrets."mcp/tavily".path;
+                  TAVILY_API_KEY = "{file:${config.sops.secrets."mcp/tavily".path}}";
                 };
               };
             };

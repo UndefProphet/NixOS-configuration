@@ -17,6 +17,7 @@
         nix = [ "nixfmt" ];
         lua = [ "stylua" ];
         python = [ "black" ];
+        typst = [ "typstyle" ];
       };
     };
   };

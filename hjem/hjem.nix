@@ -18,7 +18,6 @@ in
       config,
       pkgs,
       username,
-      homedir,
       self',
       inputs',
       ...
@@ -33,7 +32,6 @@ in
         clobberByDefault = true;
         users.${username} = {
           enable = true;
-          directory = homedir;
         };
         specialArgs = {
           lib = extendedLib pkgs;

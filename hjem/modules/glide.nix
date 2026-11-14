@@ -161,6 +161,10 @@
           )
         ))
 
+        // (lib.optionalAttrs (profile.userChrome != "") {
+          "${rootDir}/chrome/userChrome.css".text = profile.userChrome;
+        })
+
         // (lib.optionalAttrs (profile.search.engines != { }) {
           "${rootDir}/search.json.mozlz4" = {
             source = mkSearchFile name profile;
@@ -251,6 +255,12 @@
                     '';
                     type = attrsOf (attrsOf jsonFormat.type);
                     default = { };
+                  };
+
+                  userChrome = lib.mkOption {
+                    description = "userChrome.css applied to the profile.";
+                    type = lib.types.lines;
+                    default = "";
                   };
 
                   search.force = lib.mkOption {

@@ -16,34 +16,42 @@
       username,
       ...
     }:
+    let
+      cfg = config.conf.secrets;
+    in
     {
+      options.conf.secrets.enable = lib.mkEnableOption { };
+
       imports = [
         inputs.sops-nix.nixosModules.sops
       ]
       ++ (lib.optional (inputs ? nixos-credentials) "${inputs.nixos-credentials}/secrets.nix");
 
-      # Sops config
-      sops = {
-        defaultSopsFormat = "yaml";
-        age.keyFile = "${config.hj.xdg.config.directory}/sops/age/keys.txt";
-        age.generateKey = true;
-        useSystemdActivation = true;
+      config = lib.mkIf cfg.enable {
 
-        secrets."linux-password" = {
-          sopsFile = ./linux.yaml;
-          neededForUsers = true;
+        # Sops config
+        sops = {
+          defaultSopsFormat = "yaml";
+          age.keyFile = "${config.hj.xdg.config.directory}/sops/age/keys.txt";
+          age.generateKey = true;
+          useSystemdActivation = true;
+
+          secrets."linux-password" = {
+            sopsFile = ./linux.yaml;
+            neededForUsers = true;
+          };
+
+          secrets."mcp/context7" = {
+            sopsFile = ./agent.yaml;
+            owner = username;
+          };
+
+          secrets."mcp/tavily" = {
+            sopsFile = ./agent.yaml;
+            owner = username;
+          };
+
         };
-
-        secrets."mcp/context7" = {
-          sopsFile = ./agent.yaml;
-          owner = username;
-        };
-
-        secrets."mcp/tavily" = {
-          sopsFile = ./agent.yaml;
-          owner = username;
-        };
-
       };
     };
 }

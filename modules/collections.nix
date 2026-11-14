@@ -33,6 +33,7 @@
 
         (lib.mkIf cfg.core {
           conf.system.hjem.enable = lib.mkDefault true;
+          conf.secrets.enable = lib.mkDefault true;
           conf.system.nix.enable = lib.mkDefault true;
           conf.boot.grub.enable = lib.mkDefault true;
           conf.user.enable = lib.mkDefault true;

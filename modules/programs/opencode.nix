@@ -22,7 +22,24 @@
 
         hj.programs.opencode = {
           enable = true;
-          tui.theme = lib.mkForce "system";
+          cli = {
+            theme = {
+              name = "system";
+            };
+            diffs = {
+              wrap = "word";
+            };
+            session = {
+              sidebar = "auto";
+              scrollbr = true;
+              thinking = "show";
+              grouping = "auto";
+              image_preview = true;
+              tps = true;
+              markdown = "rendered";
+            };
+            animations = true;
+          };
           # enableMcpIntegration = true;
 
           extraPackages = with pkgs; [

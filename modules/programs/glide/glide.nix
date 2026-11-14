@@ -36,6 +36,23 @@
                   "sidebar.main.tools" = "aichat,syncedtabs,history,bookmarks"; # Sidebar utilities at the bottom.
                 };
 
+                userChrome = # css
+                  ''
+                    :root {
+                      --tab-border-radius: 0 !important;
+                      --tab-margin-block: 1px !important;
+                      --tab-margin-inline-inner: 5px !important;
+                      --sidebar-expanded-launcher-width: 10vw !important;
+                    }
+
+                    #sidebar-container[sidebar-launcher-expanded],
+                    #sidebar-container:has(> sidebar-main[expanded]) {
+                      width: 10vw !important;
+                      min-width: 10vw !important;
+                      max-width: 10vw !important;
+                    }
+                  '';
+
                 extensions = {
                   force = true;
                   packages = with pkgs.nur.repos.rycee.firefox-addons; [

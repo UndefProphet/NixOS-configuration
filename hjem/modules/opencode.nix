@@ -47,15 +47,15 @@
             '';
           };
 
-          tui = mkOption {
+          cli = mkOption {
             inherit (jsonFormat) type;
             default = { };
             example = {
               theme = "system";
             };
             description = ''
-              Configuration written to {file}`$XDG_CONFIG_HOME/opencode/tui.json`.
-              See <https://opencode.ai/docs/tui/> for the documentation.
+              Configuration written to {file}`$XDG_CONFIG_HOME/opencode/cli.json`.
+              See <https://opencode.ai/docs/cli/> for the documentation.
             '';
           };
         };
@@ -86,8 +86,8 @@
           builtins.toJSON ({ "$schema" = "https://opencode.ai/config.json"; } // cfg.settings)
         );
 
-        xdg.config.files."opencode/tui.json".text = lib.pretty.jsonText (
-          builtins.toJSON ({ "$schema" = "https://opencode.ai/tui.json"; } // cfg.tui)
+        xdg.config.files."opencode/cli.json".text = lib.pretty.jsonText (
+          builtins.toJSON ({ "$schema" = "https://opencode.ai/v2/cli.json"; } // cfg.cli)
         );
       };
     };

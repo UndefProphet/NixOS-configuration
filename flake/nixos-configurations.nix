@@ -57,7 +57,7 @@ in
 
           configuration = lib.mkOption {
             description = "module configurations.";
-            type = lib.types.attrs;
+            type = lib.types.deferredModule;
             default = { };
           };
 
@@ -97,7 +97,7 @@ in
             };
             modules = [
               host.configuration
-              { system.stateVersion = lib.mkDefault host.stateVersion; }
+              { system.stateVersion = host.stateVersion; }
             ]
             ++ nixos-modules
             ++ host.extraModules;

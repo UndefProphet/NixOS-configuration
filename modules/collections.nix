@@ -44,12 +44,19 @@
           conf.terminal = {
             fish.enable = true;
             kitty.enable = true;
+
+            programs = {
+              direnv.enable = true;
+              nh.enable = true;
+              nix-your-shell.enable = true;
+            };
           };
+
+          conf.programs.yazi.enable = true;
           conf.programs.neovim = {
             enable = true;
             defaultEditor = true;
           };
-          conf.programs.yazi.enable = true;
         })
 
         (lib.mkIf cfg.ssh {

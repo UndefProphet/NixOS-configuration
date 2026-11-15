@@ -23,6 +23,8 @@
         users.users."${username}".shell = pkgs.fish;
         programs.fish.enable = true;
 
+        programs.zoxide.enable = true;
+
         hj.programs.fish = {
           enable = true;
           functions.fish_greeting = "";
@@ -51,7 +53,7 @@
             # ls = "lsd -lhFXN";
             open = "xdg-open";
             cat = "${pkgs.bat}/bin/bat";
-            # cd = "z"; # Zoxide alias
+            cd = lib.mkIf config.programs.zoxide.enable "z";
           };
 
           shellAbbrs = {

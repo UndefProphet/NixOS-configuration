@@ -74,6 +74,7 @@
           conf.environment.hyprland.enable = lib.mkDefault true;
           conf.system.audio.enable = lib.mkDefault true;
           conf.environment.ly.enable = lib.mkDefault true;
+          conf.environment.qt.enable = lib.mkDefault true;
 
           # Programs
           conf.programs.glide.enable = lib.mkDefault true;

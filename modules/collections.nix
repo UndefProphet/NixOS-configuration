@@ -1,6 +1,6 @@
 { lib, ... }: {
   flake.modules.nixos.collections =
-    { config, ... }:
+    { config, pkgs, ... }:
     let
       cfg = config.collections;
     in
@@ -79,6 +79,17 @@
           # Programs
           conf.programs.glide.enable = lib.mkDefault true;
           conf.programs.zathura.enable = lib.mkDefault true;
+          hj.packages = with pkgs; [
+            keepassxc
+            equibop
+            wiremix
+            bluetui
+            btop
+            git
+            lazygit
+            discord
+            vlc
+          ];
         })
 
         (lib.mkIf cfg.neural-garbage {

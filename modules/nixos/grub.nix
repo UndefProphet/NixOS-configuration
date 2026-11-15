@@ -28,6 +28,11 @@
             gfxmodeEfi = lib.mkDefault "3440x1440";
             gfxmodeBios = lib.mkDefault "3440x1440";
             splashMode = "normal";
+
+            # Place UEFI entry last, normal way of extraEntries places it in the middle.
+            extraInstallCommands = lib.concatMapStrings (boot: ''
+              printf '\nmenuentry "UEFI Firmware Settings" {\n  fwsetup\n}\n' >> "${boot.path}/grub/grub.cfg"
+            '') config.boot.loader.grub.mirroredBoots;
           };
         };
       };

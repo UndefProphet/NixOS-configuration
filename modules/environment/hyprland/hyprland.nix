@@ -31,6 +31,11 @@
             |> lib.attrNames
             |> map (name: import ./_files/${name} { inherit config lib pkgs; });
 
+          xdph = {
+            enable = true;
+            allow_token_by_default = true;
+          };
+
           features = {
             standardEnvrionmentVariables = true;
             hyprmoncfg.enable = true;

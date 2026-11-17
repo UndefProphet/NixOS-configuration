@@ -9,7 +9,6 @@
     }:
     let
       cfg = config.windowManagers.hyprland;
-
     in
     {
       options.windowManagers.hyprland =
@@ -53,15 +52,45 @@
             });
           };
 
+          xdph = {
+            enable = lib.mkEnableOption { };
+
+            maxFPS = lib.mkOption {
+              description = "Maximum FPS of a screensharing session; 0 means no limit.";
+              type = int;
+              default = 120;
+            };
+
+            allow_token_by_default = lib.mkOption {
+              description = "Whether to tick the \"Allow restore token\" box by default.";
+              type = bool;
+              default = false;
+            };
+
+            custom_picker_binary = lib.mkOption {
+              description = "Binary used as the share picker.";
+              type = str;
+              default = "hyprland-share-picker";
+            };
+
+            force_shm = lib.mkOption {
+              description = "Whether to always use SHM instead of DMA-BUF for screensharing.";
+              type = bool;
+              default = false;
+            };
+
+            cursor_mode = lib.mkOption {
+              description = "Default cursor mode for clients that do not specify one.";
+              type = int;
+              default = 0;
+            };
+          };
+
           features = {
 
             standardEnvrionmentVariables = mkEnableOption {
               description = "Enable variables for programs";
             };
-
-            # xdph = {
-            #
-            # };
 
             hyprmoncfg = {
 
@@ -106,7 +135,7 @@
           {
             "hypr/monitors.lua" = {
               type = "copy";
-              clobber = false;
+              clobber = true;
               text = "";
             };
 
@@ -139,6 +168,18 @@
                 ${lib.concatMapStringsSep "\n" (value: ''require("files/${value.name}")'') orderedFiles}
               '';
           }
+
+          (lib.mkIf cfg.xdph.enable {
+            "hypr/xdph.conf".text = ''
+              screencopy {
+                max_fps = ${toString cfg.xdph.maxFPS}
+                allow_token_by_default = ${lib.boolToString cfg.xdph.allow_token_by_default}
+                custom_picker_binary = ${cfg.xdph.custom_picker_binary}
+                force_shm = ${lib.boolToString cfg.xdph.force_shm}
+                cursor_mode = ${toString cfg.xdph.cursor_mode}
+              }
+            '';
+          })
 
           (builtins.listToAttrs (
             map (
